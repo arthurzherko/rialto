@@ -123,11 +123,11 @@ export default {
     },
 
     amountValidation () {
-      return this.type === 'buy' ? `required|min_value:0.00010` : `required|max_value:${this.balance}|min_value:0.00010`
+      return this.type === 'buy' ? `required|min_value:0.00010` : `required|between:0.00010,${this.balance}`
     },
 
     totalValidation () {
-      return this.type === 'buy' ? `required|max_value:${this.balance}|min_value:0.00010` : `required|min_value:0.00010`
+      return this.type === 'buy' ? `required|between:0.00010,${this.balance}` : `required|min_value:0.00010`
     }
   },
 
