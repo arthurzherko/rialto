@@ -15,7 +15,7 @@
           @keyup="updateOrder"
           @blur="selectAll"
           data-vv-as="Количество BTC"
-          v-validate="`required|min_value:0.00010`" />
+          v-validate="amountValidation" />
       </div>
       <span v-show="errors.has('amount')" class="text-danger">{{ errors.first('amount') }}</span>
       <div class="form-group">
@@ -41,7 +41,7 @@
           @keyup="updateTotal"
           @blur="selectAll"
           data-vv-as="Всего (USD)"
-          v-validate="`required|max_value:${this.balance}|min_value:0.00010`" />
+          v-validate="totalValidation" />
       </div>
       <span v-show="errors.has('total')" class="text-danger">{{ errors.first('total') }}</span>
       <div class="form-group">
@@ -95,6 +95,11 @@ export default {
     lastPrice: {
       type: String,
       required: true
+    },
+
+    type: {
+      type: String,
+      default: 'buy'
     }
   },
 
@@ -115,6 +120,14 @@ export default {
 
     maxPrice () {
       return parseFloat(this.lastPrice * 1.1).toFixed(5)
+    },
+
+    amountValidation () {
+      return this.type === 'buy' ? `required|min_value:0.00010` : `required|max_value:${this.balance}|min_value:0.00010`
+    },
+
+    totalValidation () {
+      return this.type === 'buy' ? `required|max_value:${this.balance}|min_value:0.00010` : `required|min_value:0.00010`
     }
   },
 

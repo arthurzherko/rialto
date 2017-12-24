@@ -3,7 +3,7 @@
     <div class="title">
       Покупка
     </div>
-    <order-form v-if="order" v-model="order" :buyCurrencyId="0" :saleCurrencyId="1" :lastPrice="'13000.00000'" :type="'buy'"></order-form>
+    <order-form v-if="order" v-model="order" :buyCurrencyId="0" :saleCurrencyId="1" :lastPrice="'13000.00000'"></order-form>
     <button type="button" @click="createOrder">Купить</button>
   </div>
 </template>
