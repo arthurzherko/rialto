@@ -95,11 +95,6 @@ export default {
     lastPrice: {
       type: String,
       required: true
-    },
-
-    type: {
-      type: String,
-      default: 'buy'
     }
   },
 
@@ -123,11 +118,11 @@ export default {
     },
 
     amountValidation () {
-      return this.type === 'buy' ? `required|min_value:0.00010` : `required|between:0.00010,${this.balance}`
+      return this.order.type === 'buy' ? `required|min_value:0.00010` : `required|between:0.00010,${this.balance}`
     },
 
     totalValidation () {
-      return this.type === 'buy' ? `required|between:0.00010,${this.balance}` : `required|min_value:0.00010`
+      return this.order.type === 'buy' ? `required|between:0.00010,${this.balance}` : `required|min_value:0.00010`
     }
   },
 

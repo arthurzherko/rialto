@@ -10,12 +10,14 @@ export const cartMutations = {
 
 export const balanceMutations = {
   [MINUS_BALANCE]: (state, payload) => {
+    const amount = payload.type === 'buy' ? payload.totalCommission : payload.amount
     const index = state.balances.findIndex(p => p.id === payload.currencyId)
-    state.balances[index].value = (parseFloat(state.balances[index].value) - parseFloat(payload.totalCommission)).toFixed(5)
+    state.balances[index].value = (parseFloat(state.balances[index].value) - parseFloat(amount)).toFixed(5)
   },
 
   [ADD_BALANCE]: (state, payload) => {
+    const amount = payload.type === 'buy' ? payload.totalCommission : payload.amount
     const index = state.balances.findIndex(p => p.id === payload.currencyId)
-    state.balances[index].value = (parseFloat(state.balances[index].value) + parseFloat(payload.totalCommission)).toFixed(5)
+    state.balances[index].value = (parseFloat(state.balances[index].value) + parseFloat(amount)).toFixed(5)
   }
 }

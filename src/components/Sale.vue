@@ -3,7 +3,7 @@
     <div class="title">
       Продажа
     </div>
-    <order-form v-if="order" v-model="order" :buyCurrencyId="1" :saleCurrencyId="0" :lastPrice="'12500.00000'" :type="'sale'"></order-form>
+    <order-form v-if="order" v-model="order" :buyCurrencyId="1" :saleCurrencyId="0" :lastPrice="'12500.00000'"></order-form>
     <button type="button" @click="createOrder">Продать</button>
   </div>
 </template>
@@ -48,8 +48,9 @@ export default {
         if (this.errors.any()) {
           return
         }
-        this.$store.commit(ADD_TO_CART, this.order)
-        this.$store.commit(MINUS_BALANCE, this.order)
+        const newOrder = Object.assign({}, this.order)
+        this.$store.commit(ADD_TO_CART, newOrder)
+        this.$store.commit(MINUS_BALANCE, newOrder)
       }, 0)
     }
   }
