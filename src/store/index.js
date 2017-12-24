@@ -7,7 +7,7 @@ import { cartMutations, balanceMutations } from './mutations'
 Vue.use(Vuex)
 
 export default new Vuex.Store({
-  strict: true,
+  strict: false,
   state: {
     // all balances
     cart: [],

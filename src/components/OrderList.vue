@@ -1,7 +1,7 @@
 <template>
   <div class="order-list">
     <div class="title">
-      Мои Ордера
+      Мои Ордера {{cart}}
     </div>
     <div v-if="cart.length">
       <div class="order" v-for="order in cart" :key="order.id">

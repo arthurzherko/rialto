@@ -5,7 +5,6 @@
     </div>
     <order-form v-if="order" v-model="order" :buyCurrencyId="1" :saleCurrencyId="0" :lastPrice="'12500.00000'" :type="'sale'"></order-form>
     <button type="button" @click="createOrder">Продать</button>
-    <div v-if="showError" class="text-danger">К сожалению на данный момент мы предоставляем возможность создания только одного ордера</div>
   </div>
 </template>
 
@@ -34,8 +33,7 @@ export default {
   data () {
     return {
       order: defaultOrder,
-      cart: this.$store.state.cart,
-      showError: false
+      cart: this.$store.state.cart
     }
   },
 
@@ -43,11 +41,6 @@ export default {
     createOrder () {
       this.$validator.validateAll()
       if (this.errors.any()) {
-        return
-      }
-
-      if (this.cart.length > 0) {
-        this.showError = true
         return
       }
 

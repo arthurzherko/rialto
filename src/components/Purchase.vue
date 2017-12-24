@@ -5,7 +5,6 @@
     </div>
     <order-form v-if="order" v-model="order" :buyCurrencyId="0" :saleCurrencyId="1" :lastPrice="'13000.00000'" :type="'buy'"></order-form>
     <button type="button" @click="createOrder">Купить</button>
-    <div v-if="showError" class="text-danger">К сожалению на данный момент мы предоставляем возможность создания только одного ордера</div>
   </div>
 </template>
 
@@ -34,8 +33,7 @@ export default {
   data () {
     return {
       order: defaultOrder,
-      cart: this.$store.state.cart,
-      showError: false
+      cart: this.$store.state.cart
     }
   },
 
@@ -46,17 +44,13 @@ export default {
         return
       }
 
-      if (this.cart.length > 0) {
-        this.showError = true
-        return
-      }
-
       setTimeout(() => {
         if (this.errors.any()) {
           return
         }
-        this.$store.commit(ADD_TO_CART, this.order)
-        this.$store.commit(MINUS_BALANCE, this.order)
+        const newOrder = Object.assign({}, this.order)
+        this.$store.commit(ADD_TO_CART, newOrder)
+        this.$store.commit(MINUS_BALANCE, newOrder)
       }, 0)
       // whithout setTimeout there is a bug, i'll fix it later
       // it was late at night :(
